@@ -32,15 +32,10 @@ def checkin(email=os.environ.get('EMAIL'), password=os.environ.get('PASSWORD'),
     }
     response = session.post(base_url + '/user/checkin', headers=headers,
                             verify=False)
-    response = json.loads(response.text,strict=False)
-    print(response['msg'])
-    return response['msg']
+#     response = json.loads(response.text,strict=False)
+#     print(response['msg'])
+    return response
 
 
 result = checkin()
-if SCKEY != '':
-    sendurl = 'https://sctapi.ftqq.com/' + SCKEY + '.send?title=机场签到&desp=' + result
-    r = requests.get(url=sendurl)
-if TG_USER_ID != '':
-    sendurl = f'https://api.telegram.org/bot{TG_BOT_TOKEN}/sendMessage?chat_id={TG_USER_ID}&text={result}&disable_web_page_preview=True'
-    r = requests.get(url=sendurl)
+print(result)
